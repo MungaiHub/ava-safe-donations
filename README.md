@@ -216,9 +216,7 @@ MIT
 
 ## 📞 Contact
 
-- GitHub Issues: [Report bugs](https://github.com/your-repo/issues)
-- Email: amosmungai085@gmail.com
-
----
+- GitHub Issues: [Report bugs](https://github.com/MungaiHub/ava-safe-donations/issues)
+- Email: amosmungai085@gmail.com---
 
 **Ready to launch?** Start with [NEXT_STEPS.md](./NEXT_STEPS.md) 🚀
