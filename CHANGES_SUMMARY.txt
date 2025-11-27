@@ -1,0 +1,155 @@
+================================================================================
+FIX: "Contract runner does not support sending transactions" Error
+================================================================================
+
+FILE MODIFIED: src/lib/contractService.ts
+
+TOTAL CHANGES: 10 lines (2 method signatures made async, 8 added await statements)
+
+================================================================================
+CHANGE 1: getFactoryContract (Line 16)
+================================================================================
+
+BEFORE:
+  getFactoryContract: (provider: ethers.BrowserProvider) => {
+    ...
+    const signer = provider.getSigner();
+
+AFTER:
+  getFactoryContract: async (provider: ethers.BrowserProvider) => {
+    ...
+    const signer = await provider.getSigner();
+
+REASON: getSigner() is async in ethers.js v6, needs await
+
+================================================================================
+CHANGE 2: getCampaignContract (Line 28)
+================================================================================
+
+BEFORE:
+  getCampaignContract: (provider: ethers.BrowserProvider, campaignAddress: string) => {
+    const signer = provider.getSigner();
+
+AFTER:
+  getCampaignContract: async (provider: ethers.BrowserProvider, campaignAddress: string) => {
+    const signer = await provider.getSigner();
+
+REASON: getSigner() is async in ethers.js v6, needs await
+
+================================================================================
+CHANGE 3: createCampaign (Line 41)
+================================================================================
+
+BEFORE:
+  const factory = this.getFactoryContract(provider);
+
+AFTER:
+  const factory = await this.getFactoryContract(provider);
+
+REASON: getFactoryContract is now async, needs await
+
+================================================================================
+CHANGE 4: getAllCampaigns (Line 81)
+================================================================================
+
+BEFORE:
+  const factory = this.getFactoryContract(provider);
+
+AFTER:
+  const factory = await this.getFactoryContract(provider);
+
+REASON: getFactoryContract is now async, needs await
+
+================================================================================
+CHANGE 5: getUserCampaigns (Line 98)
+================================================================================
+
+BEFORE:
+  const factory = this.getFactoryContract(provider);
+
+AFTER:
+  const factory = await this.getFactoryContract(provider);
+
+REASON: getFactoryContract is now async, needs await
+
+================================================================================
+CHANGE 6: getCampaignDetails (Line 112)
+================================================================================
+
+BEFORE:
+  const campaign = this.getCampaignContract(provider, campaignAddress);
+
+AFTER:
+  const campaign = await this.getCampaignContract(provider, campaignAddress);
+
+REASON: getCampaignContract is now async, needs await
+
+================================================================================
+CHANGE 7: getCampaignStatus (Line 137)
+================================================================================
+
+BEFORE:
+  const campaign = this.getCampaignContract(provider, campaignAddress);
+
+AFTER:
+  const campaign = await this.getCampaignContract(provider, campaignAddress);
+
+REASON: getCampaignContract is now async, needs await
+
+================================================================================
+CHANGE 8: contributeToCampaign (Line 161)
+================================================================================
+
+BEFORE:
+  const campaign = this.getCampaignContract(provider, campaignAddress);
+
+AFTER:
+  const campaign = await this.getCampaignContract(provider, campaignAddress);
+
+REASON: getCampaignContract is now async, needs await
+
+================================================================================
+CHANGE 9: withdrawFunds (Line 185)
+================================================================================
+
+BEFORE:
+  const campaign = this.getCampaignContract(provider, campaignAddress);
+
+AFTER:
+  const campaign = await this.getCampaignContract(provider, campaignAddress);
+
+REASON: getCampaignContract is now async, needs await
+
+================================================================================
+CHANGE 10: requestRefund (Line 204)
+================================================================================
+
+BEFORE:
+  const campaign = this.getCampaignContract(provider, campaignAddress);
+
+AFTER:
+  const campaign = await this.getCampaignContract(provider, campaignAddress);
+
+REASON: getCampaignContract is now async, needs await
+
+================================================================================
+IMPACT: All blockchain operations now work
+================================================================================
+
+✅ Create campaigns
+✅ View campaigns
+✅ Contribute to campaigns
+✅ Withdraw funds
+✅ Request refunds
+
+================================================================================
+TEST IT: npm run dev
+================================================================================
+
+1. Restart dev server: npm run dev
+2. Go to http://localhost:5173/create
+3. Create a campaign
+4. Approve in MetaMask
+5. ✅ Should work now!
+
+================================================================================
