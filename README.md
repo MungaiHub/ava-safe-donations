@@ -217,7 +217,7 @@ MIT
 ## 📞 Contact
 
 - GitHub Issues: [Report bugs](https://github.com/your-repo/issues)
-- Email: your-email@example.com
+- Email: amosmungai085@gmail.com
 
 ---
 
